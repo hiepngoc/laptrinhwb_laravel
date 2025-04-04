@@ -16,18 +16,6 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="Phone" required>
-                @error('phone')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" name="address" value="{{ old('address', $user->address) }}" placeholder="Address" required>
-                @error('address')
-                <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
 
             <div class="mb-3">
                 <input type="password" class="form-control" name="password" placeholder="Mật khẩu (để trống nếu không đổi)">
