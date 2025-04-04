@@ -18,18 +18,6 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Số đt" required>
-                    @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" name="address" value="{{ old('address') }}" placeholder="Địa chỉ" required>
-                    @error('name')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="mb-3">
                     <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required>
                     @error('password')
                         <span class="text-danger">{{ $message }}</span>
