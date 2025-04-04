@@ -113,6 +113,8 @@ class CrudUserController extends Controller
 
         $request->validate([
             'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
         ]);
@@ -121,6 +123,8 @@ class CrudUserController extends Controller
        $user->name = $input['name'];
        $user->email = $input['email'];
        $user->password = $input['password'];
+       $user->phone = $input['phone'];
+       $user->address = $input['address'];
        $user->save();
 
         return redirect("list")->withSuccess('You have signed-in');
