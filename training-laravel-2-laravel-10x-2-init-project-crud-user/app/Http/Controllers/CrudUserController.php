@@ -59,14 +59,24 @@ class CrudUserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        
         ]);
 
         $data = $request->all();
+
+        $avatarPath = null;
+    if ($request->hasFile('avatar')) {
+        $avatarPath = $request->file('avatar')->store('avatars', 'public');
+    }
+
         $check = User::create([
             'name' => $data['name'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'avatar' => $avatarPath,
+            'website' => $request->website,
         ]);
 
         return redirect("login");
@@ -112,6 +122,8 @@ class CrudUserController extends Controller
 
         $request->validate([
             'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
         ]);
@@ -120,6 +132,10 @@ class CrudUserController extends Controller
        $user->name = $input['name'];
        $user->email = $input['email'];
        $user->password = $input['password'];
+       $user->phone = $input['phone'];
+       $user->address = $input['address'];
+       $user->avatar = $input['avatar'];
+       $user->website = $input['website'];
        $user->save();
 
         return redirect("list")->withSuccess('You have signed-in');
