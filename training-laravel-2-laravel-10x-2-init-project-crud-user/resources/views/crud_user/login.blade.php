@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 <div class="container vh-100 d-flex align-items-center justify-content-center">
     <div class="card p-4 shadow-sm" style="width: 400px;">
         <h4 class="card-title text-center mb-3">Màn hình đăng nhập</h4>
