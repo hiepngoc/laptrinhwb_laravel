@@ -11,6 +11,7 @@
                 <th>#</th>
                 <th>Username</th>
                 <th>Email</th>
+                <th>Order</th>
                 <th>Role</th>
                 <th>Thao tác</th>
             </tr>
@@ -21,6 +22,16 @@
                 <td>{{ $index =($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
+                <td>@if ($user->orders->count() > 0)
+    @foreach ($user->orders as $order)
+        <a href="{{ route('order', $order->id) }}">{{ $order->id }}</a>
+    @endforeach
+@else
+    No orders
+@endif</td>
+
+                                         
+                                    
                 <td>
                     @foreach ($user->roles as $role)
                     <a href="{{ route('role', $role->id) }}">{{ $role->name }}</a>

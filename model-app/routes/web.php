@@ -3,6 +3,8 @@
 use App\Http\Controllers\CrudUserController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,8 @@ Route::get('/', function () {
 });
 
 Route::get('/role/{id}', [RoleController::class, 'readRole'])->name('role');
+Route::get('/orders', [OrderController::class, 'index']);
+
+
+Route::get('/product/{id}', [OrderController::class, 'readOrder'])->name('order');
+

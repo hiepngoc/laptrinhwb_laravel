@@ -46,4 +46,13 @@
         {
             return $this->belongsToMany(Role::class,"user_role");
         }
+        // Trong app/Models/User.php
+        public function orders()
+        {
+            return $this->hasMany(Order::class, 'user_id'); // 'user_id' là tên khóa ngoại trong bảng 'orders'
+        }
+        public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
     }
