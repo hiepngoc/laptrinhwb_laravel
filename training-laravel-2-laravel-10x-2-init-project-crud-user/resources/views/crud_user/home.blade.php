@@ -258,7 +258,7 @@
             <a href="#">Trang chủ</a>
             <a href="#">Giới thiệu</a>
             <a href="#">Dịch vụ</a>
-            <a href="{{ route('add.tour') }}">Tour</a>
+            <a href="{{ route('admin.listTour') }}">Tours</a>
             <a href="#">Danh mục</a>
             <a href="#">Liên hệ</a>
         </div>

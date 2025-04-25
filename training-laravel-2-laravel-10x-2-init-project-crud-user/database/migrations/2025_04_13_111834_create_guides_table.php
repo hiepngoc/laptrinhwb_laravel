@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('guides', function (Blueprint $table) {
-            $table->increments('id'); // Đổi thành 'id' (viết thường)
-            $table->text('guide_Name');
-            $table->text('guide_Pno');
-            $table->text('guide_Img');
-            $table->text('guide_Mail');
-            $table->text('guide_Intro');
+            $table->id('guide_Id'); // Sử dụng id('guide_Id') cho khóa chính tự tăng BIGINT có tên 'guide_Id'
+            $table->string('guide_Name');
+            $table->string('guide_Pno');
+            $table->string('guide_Img')->nullable(); // Cho phép null
+            $table->string('guide_Mail')->nullable(); // Cho phép null
+            $table->text('guide_Intro')->nullable(); // Cho phép null
             $table->timestamps();
         });
     }

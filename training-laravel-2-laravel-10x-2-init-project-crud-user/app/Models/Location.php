@@ -13,6 +13,12 @@ class Location extends Model
     // bạn có thể bỏ dòng protected $primaryKey vì 'id' là mặc định.
     // protected $primaryKey = 'location_id'; // XÓA DÒNG NÀY NẾU ĐÃ ĐỔI TRONG MIGRATION
 
+    protected $fillable = [
+        'location_name',
+        'location_image',
+        // Thêm các trường khác mà bạn muốn cho phép gán hàng loạt
+    ];
+
     public function tours()
     {
         return $this->hasMany(Tour::class, 'location_id', 'id');

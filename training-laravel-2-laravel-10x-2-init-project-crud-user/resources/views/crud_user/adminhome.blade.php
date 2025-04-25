@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trang chủ - Discovery</title>
+    <title>Trang Admin - Discovery</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -243,6 +243,43 @@
             text-align: center;
             font-size: 1rem;
         }
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1000; /* Đảm bảo hiển thị trên các phần tử khác */
+            display: none; /* Ẩn mặc định */
+            left: 0;
+            top: 100%; /* Hiển thị ngay dưới nút Danh mục */
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-menu a {
+            color: black;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown.show .dropdown-menu {
+            display: block;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -258,14 +295,25 @@
             <a href="#">Trang chủ</a>
             <a href="#">Giới thiệu</a>
             <a href="#">Dịch vụ</a>
-            <a href="{{ route('tours.index') }}">Tours</a>
-            <a href="#">Danh mục</a>
+            <a href="{{ route('admin.tours.list') }}">Tours</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" id="categoryDropdown">Danh mục</a>
+                <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                    <a href="{{ route('users.index') }}">Quản lý Users</a>
+                    <a href="{{ route('tours.index') }}">Quản lý Tours</a>
+                    <a href="{{ route('locations.index') }}">Quản lý Locations</a>
+                    <a href="{{ route('guides.index') }}">Quản lý Guides</a>
+                    <a href="#">Cài đặt</a>
+                </div>
+            </div>
             <a href="#">Liên hệ</a>
         </div>
         <div class="auth-buttons">
-            <a href="{{ route('login') }}">Đăng nhập</a>
-            <a href="{{ route('register') }}">Đăng ký</a>
-                </div>
+            @auth
+                <span>Xin chào, {{ Auth::user()->name }}</span>
+                <a href="{{ route('signout') }}" style="margin-left: 1rem; background-color: #f44336; color: white; padding: 0.5rem 1rem; border-radius: 0.25rem; text-decoration: none;">Đăng xuất</a>
+            @endauth
+        </div>
     </header>
     <div class="content">
         <h1>Khám phá những điều tuyệt vời nhất</h1>
@@ -304,24 +352,25 @@
     <a href="#" class="scroll-top">&uarr;</a>
 
     <script>
-        const welcomeImage = document.querySelector('.welcome-image');
-        const images = welcomeImage.querySelectorAll('img');
-        let currentIndex = 0;
-        const intervalTime = 2000;
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryDropdown = document.getElementById('categoryDropdown');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
 
-        function showImage(index) {
-            images.forEach((img, i) => {
-                img.style.opacity = i === index ? 1 : 0;
-            });
-        }
+            if (categoryDropdown && dropdownMenu) {
+                categoryDropdown.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    dropdownMenu.classList.toggle('show');
+                });
 
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-        }
-
-        showImage(currentIndex);
-        setInterval(nextImage, intervalTime);
+                window.addEventListener('click', function(event) {
+                    if (!event.target.matches('.dropdown-toggle') && !event.target.closest('.dropdown-menu')) {
+                        if (dropdownMenu.classList.contains('show')) {
+                            dropdownMenu.classList.remove('show');
+                        }
+                    }
+                });
+            }
+        });
     </script>
 
 <section style="text-align: center; padding: 4rem 2rem;">
